@@ -104,6 +104,8 @@ WSGI_APPLICATION = 'contactUs.wsgi.application'
 
 import os
 from decouple import config
+import dj_database_url
+from dj_database_url import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
@@ -119,7 +121,7 @@ DATABASES = {
     }
 }  '''
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=False) #cast=bool
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')

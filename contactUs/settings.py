@@ -25,11 +25,11 @@ SECRET_KEY = 'o@g)6sv19+$he(^n-cu*o-db!**1#a7084_gbt^-#9ovt(qn)j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 from decouple import config, Csv
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
 
 
 

@@ -30,10 +30,9 @@ ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 
 
-DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+        default='postgres://mvbasflfxddmsg:480150764633b203cddfe00bd01c39aeb263675c8f5f2d9732eb3a5dd40eece4@ec2-34-237-247-76.compute-1.amazonaws.com:5432/d2of7qta4appir'
     )
 }
 

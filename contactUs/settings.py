@@ -87,17 +87,17 @@ WSGI_APPLICATION = 'contactUs.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#       # 'NAME': BASE_DIR / 'db.sqlite3',
-#        'NAME': 'contactusdb',
-#        'USER': 'postgres',
-#        'PASSWORD' : 'kiran@123',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
-#   }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+       # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'contactusdb',
+        'USER': 'postgres',
+        'PASSWORD' : 'kiran@123',
+        'HOST': 'localhost',
+        'PORT': '5432',
+   }
+ }
 
 
 
@@ -109,23 +109,13 @@ from dj_database_url import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = config('SECRET_KEY')
-'''DEBUG = config('DEBUG', default=True cast=bool)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': '',
-    }
-}  '''
 
-DATABASES = {
+
+'''DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
-}
+} '''
 
 
 # Password validation

@@ -35,7 +35,14 @@ from django.http.response import JsonResponse, HttpResponse, HttpResponseRedirec
 from django.views.decorators.csrf import csrf_exempt
 
 
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from home.forms import LoginForm, RegisterForm
+
+
+
 # Create your views here.
+
+User = get_user_model()
 
 def index(request):
     return render(request, 'home/index.html')
@@ -59,6 +66,53 @@ def detail(request):
     context = {'contactus_items' : contactus_items, 'form' : form}
     return render(request,'home/detail.html', context)
 
+
+
+
+def login_page(request):
+    form = LoginForm(request.POST or None)
+    context = {
+        'form': form
+    }
+    print(request.user.is_authenticated)
+    if form.is_valid():
+        print(form.cleaned_data)
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('index')
+        else:
+            print("error....")
+            
+    return render(request, "home/auth/login.html",context)
+
+
+
+
+
+def register_page(request):
+    form = RegisterForm(request.POST or None)
+    context = {
+        'form': form
+    }
+    print(request.user.is_authenticated)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password_first')
+        User.objects.create_user(username, email, password)
+            
+    return render(request, "home/auth/register.html",context)
+
+
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('/')
+        
 
 
 

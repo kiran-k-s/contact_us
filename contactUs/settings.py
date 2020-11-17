@@ -108,7 +108,7 @@ import dj_database_url
 from dj_database_url import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = config('SECRET_KEY')
 '''DEBUG = config('DEBUG', default=True cast=bool)
 DATABASES = {
     'default': {

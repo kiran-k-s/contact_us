@@ -25,16 +25,14 @@ SECRET_KEY = 'o@g)6sv19+$he(^n-cu*o-db!**1#a7084_gbt^-#9ovt(qn)j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+# ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+
+from decouple import config, Csv
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://mvbasflfxddmsg:480150764633b203cddfe00bd01c39aeb263675c8f5f2d9732eb3a5dd40eece4@ec2-34-237-247-76.compute-1.amazonaws.com:5432/d2of7qta4appir'
-    )
-}
 
 
 # Application definition
@@ -89,19 +87,44 @@ WSGI_APPLICATION = 'contactUs.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#       # 'NAME': BASE_DIR / 'db.sqlite3',
+#        'NAME': 'contactusdb',
+#        'USER': 'postgres',
+#        'PASSWORD' : 'kiran@123',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#   }
+# }
+
+
+
+
+import os
+from decouple import config
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SECRET_KEY = config('SECRET_KEY')
+'''DEBUG = config('DEBUG', default=True cast=bool)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-       # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': 'contactusdb',
-        'USER': 'postgres',
-        'PASSWORD' : 'kiran@123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': '',
     }
+}  '''
+
+DEBUG = config('DEBUG', default=False cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
-
-
 
 
 # Password validation
